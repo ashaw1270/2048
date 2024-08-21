@@ -65,7 +65,7 @@ function shiftRowRight(row, oldEnd, newEnd) {
 
 function moveRight() {
     for (let row = 0; row < numSquares; row++) {
-        for (let col = numSquares - 1; col > 0; col--) {
+        for (let col = numSquares - 1; col >= 0; col--) {
             if (col !== numSquares - 1 && grid[row][col] === grid[row][col + 1]) {
                 grid[row][col + 1] *= 2;
                 grid[row][col] = 0;
@@ -92,7 +92,7 @@ function shiftRowDown(col, oldEnd, newEnd) {
 
 function moveDown() {
     for (let col = 0; col < numSquares; col++) {
-        for (let row = numSquares - 1; row > 0; row--) {
+        for (let row = numSquares - 1; row >= 0; row--) {
             if (row !== numSquares - 1 && grid[row][col] === grid[row + 1][col]) {
                 grid[row + 1][col] *= 2;
                 grid[row][col] = 0;
