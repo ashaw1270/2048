@@ -2,6 +2,13 @@ import {updateGrid, numSquares} from './display/display.js';
 
 let grid;
 
+document.addEventListener('DOMContentLoaded', () => {
+    grid = Array(numSquares).fill().map(() => Array(numSquares).fill(0));
+    generateNewBlock();
+    generateNewBlock();
+    updateGrid(grid);
+});
+
 export default function move(direction) {
     switch (direction) {
         case 'up':
@@ -18,6 +25,8 @@ export default function move(direction) {
             break;
     }
     generateNewBlock();
+    updateGrid(grid);
+    checkForGameOver();
 }
 
 function shiftRowUp(col, oldEnd, newEnd) {
@@ -45,7 +54,6 @@ function moveUp() {
             }
         }
     }
-    updateGrid(grid);
 }
 
 function shiftRowRight(row, oldEnd, newEnd) {
@@ -73,7 +81,6 @@ function moveRight() {
             }
         }
     }
-    updateGrid(grid);
 }
 
 function shiftRowDown(col, oldEnd, newEnd) {
@@ -101,7 +108,6 @@ function moveDown() {
             }
         }
     }
-    updateGrid(grid);
 }
 
 function shiftRowLeft(row, oldEnd, newEnd) {
@@ -129,7 +135,6 @@ function moveLeft() {
             }
         }
     }
-    updateGrid(grid);
 }
 
 function generateNewBlock() {
@@ -142,12 +147,17 @@ function generateNewBlock() {
     const index = emptyCells[Math.floor(Math.random() * emptyCells.length)];
     const numToAdd = Math.floor(Math.random() * 9) === 8 ? 4 : 2;
     grid[index[0]][index[1]] = numToAdd;
-    updateGrid(grid);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    grid = Array(numSquares).fill().map(() => Array(numSquares).fill(0));
-    generateNewBlock();
-    generateNewBlock();
-    updateGrid(grid);
-});
+function checkForGameOver() {
+    for (let i = 0; i < numSquares; i++) {
+        for (let j = 0; j < numSquares; j++) {
+            if (!grid[i][j]
+                || i !== numSquares - 1 && grid[i][j] === grid[i + 1][j]
+                || j !== numSquares - 1 && grid[i][j] === grid[i][j + 1]) {
+                return;
+            }
+        }
+    }
+    document.getElementById('modal').style.display = 'block';
+}
