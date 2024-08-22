@@ -4,9 +4,11 @@ let grid;
 export let colorChoice;
 
 document.addEventListener('keydown', event => {
-    const key = event.key;
-    if (/^Arrow/.test(key)) {
-        move(key.substring(5).toLowerCase());
+    const key = event.key.toLowerCase();
+    if (/^arrow/.test(key)) {
+        move(key.substring(5));
+    } else if (['w', 'a', 's', 'd'].includes(key)) {
+        move(key);
     }
 });
 
@@ -27,15 +29,19 @@ function newGame() {
 function move(direction) {
     switch (direction) {
         case 'up':
+        case 'w':
             moveUp();
             break;
         case 'right':
+        case 'd':
             moveRight();
             break;
         case 'down':
+        case 's':
             moveDown();
             break;
         case 'left':
+        case 'a':
             moveLeft();
             break;
     }
