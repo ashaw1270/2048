@@ -9,6 +9,8 @@ document.addEventListener('keydown', event => {
         move(key.substring(5));
     } else if (['w', 'a', 's', 'd'].includes(key)) {
         move(key);
+    } else if (key === '*') {
+        randomMoves();
     }
 });
 
@@ -176,13 +178,24 @@ function checkForGameOver() {
             if (!grid[i][j]
                 || i !== numSquares - 1 && grid[i][j] === grid[i + 1][j]
                 || j !== numSquares - 1 && grid[i][j] === grid[i][j + 1]) {
-                return;
+                return false;
             }
         }
     }
     gameOver();
+    return true;
 }
 
 function gameOver() {
     document.getElementById('modal').style.display = 'block';
+}
+
+function randomMoves() {
+    const interval = setInterval(() => {
+        if (!checkForGameOver()) {
+            move(['up', 'right', 'down', 'left'][Math.floor(Math.random() * 4)]);
+        } else {
+            clearInterval(interval);
+        }
+    }, 100);
 }
