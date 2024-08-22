@@ -1,15 +1,30 @@
 import {updateGrid, numSquares} from './display/display.js';
 
 let grid;
+export let colorChoice;
+
+document.addEventListener('keydown', event => {
+    const key = event.key;
+    if (/^Arrow/.test(key)) {
+        move(key.substring(5).toLowerCase());
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
+    newGame();
+    document.getElementById('modal-button').addEventListener('click', () => newGame());
+});
+
+function newGame() {
+    colorChoice = Math.floor(Math.random() * 3);
+    document.getElementById('modal').style.display = 'none';
     grid = Array(numSquares).fill().map(() => Array(numSquares).fill(0));
     generateNewBlock();
     generateNewBlock();
     updateGrid(grid);
-});
+}
 
-export default function move(direction) {
+function move(direction) {
     switch (direction) {
         case 'up':
             moveUp();
@@ -159,5 +174,9 @@ function checkForGameOver() {
             }
         }
     }
+    gameOver();
+}
+
+function gameOver() {
     document.getElementById('modal').style.display = 'block';
 }

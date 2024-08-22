@@ -4,10 +4,10 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #ffffff;
+    background-color: #424B54;
 }
 
-.modal {
+#modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@ body {
     align-items: center;
 }
 
-.modal-text {
+#modal-message {
     background-color: #999999;
     font-family: sans-serif;
     font-size: 30px;
@@ -32,6 +32,20 @@ body {
     text-align: center;
 }
 
+.inner-modal {
+    font-family: sans-serif;
+    color: white;
+}
+
+#modal-text {
+    font-size: 30px;
+}
+
+#modal-button {
+    background-color: #808080;
+    font-size: 20px;
+}
+
 #grid {
     display: grid;
 }
@@ -40,11 +54,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #999999;
     border-radius: 10px;
 }
 
 .number {
-    color: white;
+    color: #424B54;
     font-family: sans-serif;
 }
