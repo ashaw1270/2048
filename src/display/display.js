@@ -27,72 +27,71 @@ const squares = Array(numSquares).fill().map(() => Array(numSquares).fill().map(
 
 const colors = [
     {
-        2: {'#C5BAAF': false}, 
-        4: {'#EBCFB2': false},
-        8: {'#D5ACA9': false},
-        16: {'#B38D97': false},
-        32: {'#AFBAC5': false},
-        64: {'#B2CEEB': false},
-        128: {'#A9D2D5': false},
-        256: {'#8DB3A9': false},
-        512: {'#C5BAAF': false},
-        1024: {'#EBCFB2': false},
-        2048: {'#D5ACA9': false},
-        4096: {'#B38D97': false},
-        8192: {'#AFBAC5': false},
-        16384: {'#B2CEEB': false},
-        32768: {'#A9D2D5': false},
-        65536: {'#8DB3A9': false}
+        2: "hsl(209.03deg 100.00% 81.76%)",
+        4: "hsl(338.25deg 100.00% 84.31%)",
+        8: "hsl(207.69deg 97.01% 86.86%)",
+        16: "hsl(337.09deg 100.00% 89.22%)",
+        32: "hsl(278.46deg 35.14% 78.24%)",
+        64: "hsl(29.03deg 100.00% 81.76%)",
+        128: "hsl(158.25deg 100.00% 84.31%)",
+        256: "hsl(27.69deg 97.01% 86.86%)",
+        512: "hsl(157.09deg 100.00% 89.22%)",
+        1024: "hsl(98.46deg 35.14% 78.24%)",
+        2048: "hsl(209.03deg 100.00% 81.76%)",
+        4096: "hsl(338.25deg 100.00% 84.31%)",
+        8192: "hsl(207.69deg 97.01% 86.86%)",
+        16384: "hsl(337.09deg 100.00% 89.22%)",
+        32768: "hsl(278.46deg 35.14% 78.24%)"
     },
     {
-        2: {'#E5C3D1': false},
-        4: {'#F7A9A8': false},
-        8: {'#613F75': true}, // dark
-        16: {'#7D82B8': false},
-        32: {'#EF798A': false},
-        64: {'#C3E5D7': false},
-        128: {'#A8F6F7': false},
-        256: {'#53753F': true}, // dark
-        512: {'#B8B37D': false},
-        1024: {'#79EFDE': false},
-        2048: {'#E5C3D1': false},
-        4096: {'#F7A9A8': false},
-        8192: {'#613F75': true}, // dark
-        16384: {'#7D82B8': false},
-        32768: {'#EF798A': false},
-        65536: {'#C3E5D7': false}
+        2: "hsl(142.88deg 80.82% 71.37%)",
+        4: "hsl(50.00deg 100.00% 81.18%)",
+        8: "hsl(100.00deg 91.58% 81.37%)",
+        16: "hsl(345.37deg 100.00% 91.96%)",
+        32: "hsl(178.76deg 77.60% 75.49%)",
+        64: "hsl(322.88deg 80.82% 71.37%)",
+        128: "hsl(230.00deg 100.00% 81.18%)",
+        256: "hsl(280.00deg 91.58% 81.37%)",
+        512: "hsl(165.37deg 100.00% 91.96%)",
+        1024: "hsl(358.76deg 77.60% 75.49%)",
+        2048: "hsl(142.88deg 80.82% 71.37%)",
+        4096: "hsl(50.00deg 100.00% 81.18%)",
+        8192: "hsl(100.00deg 91.58% 81.37%)",
+        16384: "hsl(345.37deg 100.00% 91.96%)",
+        32768: "hsl(178.76deg 77.60% 75.49%)"
     },
     {
-        2: {'#C6E0FF': false},
-        4: {'#315659': true}, // dark
-        8: {'#2978A0': false},
-        16: {'#BCAB79': false},
-        32: {'#587274': true}, // dark
-        64: {'#FFE5C6': false},
-        128: {'#798ABC': false},
-        256: {'#593431': true}, // dark
-        512: {'#745A58': true}, // dark
-        1024: {'#C6E0FF': false},
-        2048: {'#315659': true}, // dark
-        4096: {'#2978A0': false},
-        8192: {'#BCAB79': false},
-        16384: {'#587274': true}, // dark
-        32768: {'#FFE5C6': false},
-        65536: {'#798ABC': false}
+        2: "hsl(349.29deg 83.58% 73.73%)",
+        4: "hsl(117.39deg 37.10% 75.69%)",
+        8: "hsl(355.20deg 100.00% 95.10%)",
+        16: "hsl(0.67deg 64.96% 73.14%)",
+        32: "hsl(11.49deg 64.38% 85.69%)",
+        64: "hsl(169.29deg 83.58% 73.73%)",
+        128: "hsl(297.39deg 37.10% 75.69%)",
+        256: "hsl(175.20deg 100.00% 95.10%)",
+        512: "hsl(180.67deg 64.96% 73.14%)",
+        1024: "hsl(191.49deg 64.38% 85.69%)",
+        2048: "hsl(349.29deg 83.58% 73.73%)",
+        4096: "hsl(117.39deg 37.10% 75.69%)",
+        8192: "hsl(355.20deg 100.00% 95.10%)",
+        16384: "hsl(0.67deg 64.96% 73.14%)",
+        32768: "hsl(11.49deg 64.38% 85.69%)"        
     }
 ]
 
 export function updateGrid(array) {
     array.forEach((row, i) => row.forEach((num, j) => {
-        const numColorObj = num ? colors[colorChoice][num] : [];
-        const numColor = num ? Object.keys(numColorObj)[0] : '#768493';
-        const dark = num ? numColorObj[numColor] : false;
-        squares[i][j].style.backgroundColor = num ? numColor : '#768493';
-        const numText = num ? String(num) : '';
-        const numDigits = numText.length > 1 ? numText.length : 2;
+        if (!num) {
+            squares[i][j].style.backgroundColor = '#768493';
+            squares[i][j].querySelector('.number').innerHTML = '';
+            return;
+        }
+        squares[i][j].style.backgroundColor = colors[colorChoice][num];
+        const numText = String(num);
+        const numDigits = numText.length === 1 ? 2 : numText.length;
         const numElement = squares[i][j].querySelector('.number');
         numElement.style.fontSize = `${4 / 3 * squareSize / numDigits}px`;
-        numElement.style.color = dark ? '#99a4af' : '#424B54';
+        numElement.style.color = '#424B54';
         numElement.innerHTML = numText;
     }));
 }
