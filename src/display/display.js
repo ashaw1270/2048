@@ -77,7 +77,7 @@ const colors = [
         16384: "hsl(0.67deg 64.96% 73.14%)",
         32768: "hsl(11.49deg 64.38% 85.69%)"        
     }
-]
+];
 
 export function updateGrid(array) {
     array.forEach((row, i) => row.forEach((num, j) => {
