@@ -1,7 +1,7 @@
 import {updateGrid, numSquares} from './display/display.js';
 
 let grid;
-export let colorChoice;
+export let colorChoice = 0;
 
 document.addEventListener('keydown', event => {
     const key = event.key.toLowerCase();
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function newGame() {
-    colorChoice = Math.floor(Math.random() * 3);
+    colorChoice = (colorChoice + 1) % 3;
     document.getElementById('modal').style.display = 'none';
     grid = Array(numSquares).fill().map(() => Array(numSquares).fill(0));
     generateNewBlock();
