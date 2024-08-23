@@ -64,18 +64,18 @@ const colors = [
     },
     {
         2: {'#C6E0FF': false},
-        4: {'#BCAB79': false},
+        4: {'#315659': true}, // dark
         8: {'#2978A0': false},
-        16: {'#315659': true}, // dark
+        16: {'#BCAB79': false},
         32: {'#587274': true}, // dark
         64: {'#FFE5C6': false},
         128: {'#798ABC': false},
         256: {'#593431': true}, // dark
         512: {'#745A58': true}, // dark
         1024: {'#C6E0FF': false},
-        2048: {'#BCAB79': false},
+        2048: {'#315659': true}, // dark
         4096: {'#2978A0': false},
-        8192: {'#315659': true}, // dark
+        8192: {'#BCAB79': false},
         16384: {'#587274': true}, // dark
         32768: {'#FFE5C6': false},
         65536: {'#798ABC': false}
