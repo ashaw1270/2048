@@ -79,12 +79,8 @@ function shiftRowUp(col, oldEnd, newEnd) {
 }
 
 function moveUp() {
-    for (let col = 0; col < numSquares; col++) {
+    function shift(col) {
         for (let row = 0; row < numSquares; row++) {
-            if (row !== 0 && grid[row][col] === grid[row - 1][col]) {
-                grid[row - 1][col] *= 2;
-                grid[row][col] = 0;
-            }
             if (!grid[row][col]) {
                 let oldEnd = row;
                 while (oldEnd < numSquares && !grid[oldEnd][col]) {
@@ -96,6 +92,17 @@ function moveUp() {
             }
         }
     }
+
+    for (let col = 0; col < numSquares; col++) {
+        shift(col);
+        for (let row = 0; row < numSquares - 1; row++) {
+            if (grid[row][col] === grid[row + 1][col]) {
+                grid[row][col] *= 2;
+                grid[row + 1][col] = 0;
+            }
+        }
+        shift(col);
+    }
 }
 
 function shiftRowRight(row, oldEnd, newEnd) {
@@ -106,12 +113,8 @@ function shiftRowRight(row, oldEnd, newEnd) {
 }
 
 function moveRight() {
-    for (let row = 0; row < numSquares; row++) {
+    function shift(row) {
         for (let col = numSquares - 1; col >= 0; col--) {
-            if (col !== numSquares - 1 && grid[row][col] === grid[row][col + 1]) {
-                grid[row][col + 1] *= 2;
-                grid[row][col] = 0;
-            }
             if (!grid[row][col]) {
                 let oldEnd = col;
                 while (oldEnd >= 0 && !grid[row][oldEnd]) {
@@ -123,6 +126,17 @@ function moveRight() {
             }
         }
     }
+
+    for (let row = 0; row < numSquares; row++) {
+        shift(row);
+        for (let col = numSquares - 1; col > 0; col--) {
+            if (grid[row][col] === grid[row][col - 1]) {
+                grid[row][col] *= 2;
+                grid[row][col - 1] = 0;
+            }
+        }
+        shift(row);
+    }
 }
 
 function shiftRowDown(col, oldEnd, newEnd) {
@@ -133,12 +147,8 @@ function shiftRowDown(col, oldEnd, newEnd) {
 }
 
 function moveDown() {
-    for (let col = 0; col < numSquares; col++) {
+    function shift(col) {
         for (let row = numSquares - 1; row >= 0; row--) {
-            if (row !== numSquares - 1 && grid[row][col] === grid[row + 1][col]) {
-                grid[row + 1][col] *= 2;
-                grid[row][col] = 0;
-            }
             if (!grid[row][col]) {
                 let oldEnd = row;
                 while (oldEnd >= 0 && !grid[oldEnd][col]) {
@@ -150,6 +160,17 @@ function moveDown() {
             }
         }
     }
+
+    for (let col = 0; col < numSquares; col++) {
+        shift(col);
+        for (let row = numSquares - 1; row > 0; row--) {
+            if (grid[row][col] === grid[row - 1][col]) {
+                grid[row][col] *= 2;
+                grid[row - 1][col] = 0;
+            }
+        }
+        shift(col);
+    }
 }
 
 function shiftRowLeft(row, oldEnd, newEnd) {
@@ -160,12 +181,8 @@ function shiftRowLeft(row, oldEnd, newEnd) {
 }
 
 function moveLeft() {
-    for (let row = 0; row < numSquares; row++) {
+    function shift(row) {
         for (let col = 0; col < numSquares; col++) {
-            if (col !== 0 && grid[row][col] === grid[row][col - 1]) {
-                grid[row][col - 1] *= 2;
-                grid[row][col] = 0;
-            }
             if (!grid[row][col]) {
                 let oldEnd = col;
                 while (oldEnd < numSquares && !grid[row][oldEnd]) {
@@ -176,6 +193,17 @@ function moveLeft() {
                 }
             }
         }
+    }
+
+    for (let row = 0; row < numSquares; row++) {
+        shift(row);
+        for (let col = 0; col < numSquares - 1; col++) {
+            if (grid[row][col] === grid[row][col + 1]) {
+                grid[row][col] *= 2;
+                grid[row][col + 1] = 0;
+            }
+        }
+        shift(row);
     }
 }
 
