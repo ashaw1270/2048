@@ -14,6 +14,25 @@ document.addEventListener('keydown', event => {
     }
 });
 
+let touchStartX, touchStartY, touchEndX, touchEndY;
+
+document.addEventListener('touchstart', event => {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+});
+
+document.addEventListener('touchend', event => {
+    touchEndX = event.changedTouches[0].clientX;
+    touchEndY = event.changedTouches[0].clientY;
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+        move(dx > 0 ? 'right' : 'left');
+    } else {
+        move(dy > 0 ? 'down' : 'up');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     newGame();
     document.getElementById('modal-button').addEventListener('click', () => newGame());
