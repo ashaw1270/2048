@@ -1,7 +1,7 @@
 import {colorChoice} from '../game.js';
 
 export const numSquares = 4;
-const squareGap = 10;
+const squareGap = window.innerWidth >= 1024 ? 10 : 5;
 
 const gridElement = document.getElementById('grid');
 gridElement.style.gridTemplateRows = `repeat(${numSquares}, 1fr)`;
