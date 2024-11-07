@@ -3,6 +3,10 @@ import {updateGrid, numSquares} from './display/display.js';
 let grid;
 export let colorChoice = 0;
 
+let maxSquare = 0;
+
+let gameRunning = false;
+
 document.addEventListener('keydown', event => {
     const key = event.key.toLowerCase();
     if (/^arrow/.test(key)) {
@@ -11,6 +15,10 @@ document.addEventListener('keydown', event => {
         move(key);
     } else if (key === '*') {
         randomMoves();
+    } else if (key == '&') {
+        solve();
+    } else if (key == 'enter' && !gameRunning) {
+        newGame();
     }
 });
 
@@ -45,6 +53,7 @@ function newGame() {
     generateNewBlock();
     generateNewBlock();
     updateGrid(grid);
+    gameRunning = true;
 }
 
 function move(direction) {
@@ -98,6 +107,7 @@ function moveUp() {
         for (let row = 0; row < numSquares - 1; row++) {
             if (grid[row][col] === grid[row + 1][col]) {
                 grid[row][col] *= 2;
+                maxSquare = Math.max(grid[row][col], maxSquare);
                 grid[row + 1][col] = 0;
             }
         }
@@ -132,6 +142,7 @@ function moveRight() {
         for (let col = numSquares - 1; col > 0; col--) {
             if (grid[row][col] === grid[row][col - 1]) {
                 grid[row][col] *= 2;
+                maxSquare = Math.max(grid[row][col], maxSquare);
                 grid[row][col - 1] = 0;
             }
         }
@@ -166,6 +177,7 @@ function moveDown() {
         for (let row = numSquares - 1; row > 0; row--) {
             if (grid[row][col] === grid[row - 1][col]) {
                 grid[row][col] *= 2;
+                maxSquare = Math.max(grid[row][col], maxSquare);
                 grid[row - 1][col] = 0;
             }
         }
@@ -200,6 +212,7 @@ function moveLeft() {
         for (let col = 0; col < numSquares - 1; col++) {
             if (grid[row][col] === grid[row][col + 1]) {
                 grid[row][col] *= 2;
+                maxSquare = Math.max(grid[row][col], maxSquare);
                 grid[row][col + 1] = 0;
             }
         }
@@ -235,14 +248,50 @@ function checkForGameOver() {
 
 function gameOver() {
     document.getElementById('modal').style.display = 'block';
+    document.getElementById('modal-text').innerHTML = `Game Over!\nHigh score: ${maxSquare}`;
+    running = false;
+    running2 = false;
+    gameRunning = false;
 }
 
+let interval;
+let running = false;
+
 function randomMoves() {
-    const interval = setInterval(() => {
+    if (running) {
+        clearInterval(interval);
+        running = false;
+        return;
+    }
+
+    running = true;
+    interval = setInterval(() => {
         if (!checkForGameOver()) {
             move(['up', 'right', 'down', 'left'][Math.floor(Math.random() * 4)]);
         } else {
             clearInterval(interval);
         }
-    }, 100);
+    }, 1);
+}
+
+let interval2;
+let running2 = false;
+let direction = 0;
+
+function solve() {
+    if (running2) {
+        clearInterval(interval2);
+        running2 = false;
+        return;
+    }
+
+    running2 = true;
+    interval2 = setInterval(() => {
+        if (!checkForGameOver()) {
+            move(['up', 'right', 'down', 'left'][direction]);
+            direction = (direction + 1) % 4;
+        } else {
+            clearInterval(interval2);
+        }
+    }, 1);
 }
