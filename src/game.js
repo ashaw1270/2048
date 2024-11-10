@@ -227,9 +227,11 @@ function generateNewBlock() {
             emptyCells.push([i, j]);
         }
     }));
-    const index = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-    const numToAdd = Math.floor(Math.random() * 9) === 8 ? 4 : 2;
-    grid[index[0]][index[1]] = numToAdd;
+    if (emptyCells.length) {
+        const index = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        const numToAdd = Math.floor(Math.random() * 9) === 8 ? 4 : 2;
+        grid[index[0]][index[1]] = numToAdd;
+    }
 }
 
 function checkForGameOver() {
@@ -288,6 +290,8 @@ function solve() {
     running2 = true;
     interval2 = setInterval(() => {
         if (!checkForGameOver()) {
+            const d = ['up', 'right', 'down', 'left'][direction];
+            console.log(d);
             move(['up', 'right', 'down', 'left'][direction]);
             direction = (direction + 1) % 4;
         } else {
